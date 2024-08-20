@@ -1,7 +1,7 @@
 {
   "files": {
     "main.css": "/ourjoy-einvite-react/static/css/main.f5316cfa.css",
-    "main.js": "/ourjoy-einvite-react/static/js/main.f65d69c4.js",
+    "main.js": "/ourjoy-einvite-react/static/js/main.a809caea.js",
     "static/js/453.5d9dd9fe.chunk.js": "/ourjoy-einvite-react/static/js/453.5d9dd9fe.chunk.js",
     "static/media/penutup.png": "/ourjoy-einvite-react/static/media/penutup.745ae18937ca1cc73e6b.png",
     "static/media/background-card.png": "/ourjoy-einvite-react/static/media/background-card.3fa7fe664f6736e55c90.png",
@@ -40,11 +40,11 @@
     "static/media/DiamondBridge.otf": "/ourjoy-einvite-react/static/media/DiamondBridge.3471418292e335b189d4.otf",
     "index.html": "/ourjoy-einvite-react/index.html",
     "main.f5316cfa.css.map": "/ourjoy-einvite-react/static/css/main.f5316cfa.css.map",
-    "main.f65d69c4.js.map": "/ourjoy-einvite-react/static/js/main.f65d69c4.js.map",
+    "main.a809caea.js.map": "/ourjoy-einvite-react/static/js/main.a809caea.js.map",
     "453.5d9dd9fe.chunk.js.map": "/ourjoy-einvite-react/static/js/453.5d9dd9fe.chunk.js.map"
   },
   "entrypoints": [
     "static/css/main.f5316cfa.css",
-    "static/js/main.f65d69c4.js"
+    "static/js/main.a809caea.js"
   ]
 }
