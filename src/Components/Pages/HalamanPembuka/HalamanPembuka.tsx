@@ -18,6 +18,8 @@ export const HalamanPembuka = () => {
   //   pageKey: "HalamanPembuka",
   // });
 
+  console.log("React");
+
   const currentUrl = new URL(window.location.href);
   const searchParams = currentUrl.searchParams;
 
