@@ -18,9 +18,8 @@ export const HalamanPembuka = () => {
   //   pageKey: "HalamanPembuka",
   // });
 
-  const searchParams = {
-    get: () => "",
-  } as any;
+  const currentUrl = new URL(window.location.href);
+  const searchParams = currentUrl.searchParams;
 
   const recipient = searchParams?.get("kepada");
 
