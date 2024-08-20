@@ -18,7 +18,7 @@ export const HalamanPembuka = () => {
   //   pageKey: "HalamanPembuka",
   // });
 
-  console.log("React");
+  console.log("React 2");
 
   const currentUrl = new URL(window.location.href);
   const searchParams = currentUrl.searchParams;
