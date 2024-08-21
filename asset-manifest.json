@@ -1,7 +1,7 @@
 {
   "files": {
     "main.css": "/static/css/main.177f3c74.css",
-    "main.js": "/static/js/main.96f672a8.js",
+    "main.js": "/static/js/main.f8ade102.js",
     "static/js/206.6d3c647a.chunk.js": "/static/js/206.6d3c647a.chunk.js",
     "static/media/penutup.png": "/static/media/penutup.745ae18937ca1cc73e6b.png",
     "static/media/background-card.png": "/static/media/background-card.3fa7fe664f6736e55c90.png",
@@ -42,6 +42,6 @@
   },
   "entrypoints": [
     "static/css/main.177f3c74.css",
-    "static/js/main.96f672a8.js"
+    "static/js/main.f8ade102.js"
   ]
 }
