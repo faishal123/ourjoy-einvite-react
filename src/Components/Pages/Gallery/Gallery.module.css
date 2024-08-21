@@ -2,6 +2,10 @@
   /* background: linear-gradient(0deg, var(--primary-background) 0%, white 20%); */
 }
 
+.carouselItemOldBrowser {
+  margin: 0 10px;
+}
+
 .verticalLine {
   height: 50px;
   width: 1px;

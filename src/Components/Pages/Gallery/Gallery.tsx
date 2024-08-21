@@ -27,6 +27,7 @@ import gallery19 from "../../../assets/images/gallery/gallery-19 small.jpg";
 import gallery20 from "../../../assets/images/gallery/gallery-20 small.jpg";
 import gallery21 from "../../../assets/images/gallery/gallery-21 small.jpg";
 import gallery22 from "../../../assets/images/gallery/gallery-22 small.jpg";
+import { useOldBrowser } from "../../../utils/oldBrowserContext";
 
 const photos = [
   gallery1,
@@ -52,36 +53,6 @@ const photos = [
   gallery21,
   gallery22,
 ];
-
-const ImageModal = ({
-  image,
-  currentIndex,
-}: {
-  image: string;
-  currentIndex: number;
-}) => {
-  const [imageDimension, setImageDimension] = useState({ height: 0, width: 0 });
-
-  useEffect(() => {
-    let imageHeight;
-    let imageWidth;
-
-    var img = new Image();
-    img.src = image;
-
-    img.onload = () => {
-      imageHeight = img.height;
-      imageWidth = img.width;
-      setImageDimension({ height: imageHeight, width: imageWidth });
-    };
-  }, []);
-
-  return (
-    <div className={styles.imageModalContainer}>
-      <img src={image} alt="gallery" />
-    </div>
-  );
-};
 
 const NavigationButton = ({
   direction,
@@ -112,21 +83,7 @@ const Carousel = ({
   onClickPrev: () => void;
   current: number;
 }) => {
-  const onClickNavigation = ({ increase }: { increase: boolean }) => {
-    const scrollContainerElement = document.getElementById(
-      "carousel-scroll-container"
-    );
-
-    if (scrollContainerElement) {
-      const currentScrollPosition = scrollContainerElement.scrollLeft;
-      scrollContainerElement?.scrollTo &&
-        scrollContainerElement?.scrollTo({
-          left: currentScrollPosition + (increase ? 400 : -400),
-          behavior: "smooth",
-        });
-    }
-  };
-
+  const { isOldBrowser } = useOldBrowser();
   return (
     <>
       <div id="carousel-scroll-container" className={styles.carouselContainer}>
@@ -134,6 +91,14 @@ const Carousel = ({
           {photos.map((src, i) => {
             return (
               <div
+                style={
+                  isOldBrowser
+                    ? {
+                        margin: "0 10px",
+                      }
+                    : {}
+                }
+                id={`ourGallery-${i}`}
                 onClick={() => onClickPhoto(i)}
                 className={`${i === current ? styles.active : ""} ${
                   styles.singleCarouselItem
@@ -168,19 +133,24 @@ const Carousel = ({
 
 const PhotoGallery = () => {
   const [current, setCurrent] = useState(0);
-  // const { renderModal } = useModal();
-
+  const { isOldBrowser } = useOldBrowser();
   useEffect(() => {
     const scrollContainerElement = document.getElementById(
       "carousel-scroll-container"
     );
 
-    if (scrollContainerElement) {
-      scrollContainerElement?.scrollTo &&
-        scrollContainerElement?.scrollTo({
-          left: current * 130,
-          behavior: "smooth",
-        });
+    if (!isOldBrowser) {
+      if (scrollContainerElement) {
+        scrollContainerElement?.scrollTo &&
+          scrollContainerElement?.scrollTo({
+            left: current * 130,
+            behavior: "smooth",
+          });
+      }
+    } else {
+      if (scrollContainerElement) {
+        scrollContainerElement.scrollLeft = current * 140;
+      }
     }
   }, [current]);
 
@@ -192,18 +162,6 @@ const PhotoGallery = () => {
         images={photos}
         currentImage={current}
         className={styles.previewContainer}
-        // onClick={() => {
-        //   renderModal(
-        //     <ImageModal currentIndex={current} image={photos[current]} />,
-        //     `gallery-${current}`,
-        //     {
-        //       maxWidth: "80vw",
-        //       maxHeight: "80vh",
-        //       padding: "0px",
-        //       overflow: "hidden",
-        //     }
-        //   );
-        // }}
       />
 
       <Carousel

@@ -1,4 +1,5 @@
 import styles from "./Video.module.css";
+import { useOldBrowser } from "../../../utils/oldBrowserContext";
 
 const Video = ({
   id,
@@ -13,6 +14,10 @@ const Video = ({
   controls?: boolean;
   maxHeight?: string;
 }) => {
+  const { isOldBrowser } = useOldBrowser();
+  if (isOldBrowser) {
+    return null;
+  }
   return (
     <div
       style={{

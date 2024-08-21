@@ -1,7 +1,9 @@
 import { Whatsapp } from "../../Shared/Icons/Icons";
 import styles from "./Footer.module.css";
+import { useOldBrowser } from "../../../utils/oldBrowserContext";
 
 export const Footer = () => {
+  const { isOldBrowser } = useOldBrowser();
   const whatsappNumber = "+6287815917683";
   const message =
     "Halo OurJoy by Joyella, apa bisa tanya tanya & pesan undangan online ?";
@@ -22,7 +24,10 @@ export const Footer = () => {
           alt="joyella"
         />
       </div>
-      <div className={styles.divider}></div>
+      <div
+        style={isOldBrowser ? { margin: "0 10px" } : {}}
+        className={styles.divider}
+      ></div>
       <div>
         <a
           href={whatsappUrl.toString()}

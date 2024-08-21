@@ -2,6 +2,7 @@ import { Text } from "../Text/Text";
 import React from "react";
 import styles from "./Title.module.css";
 import { useMobile } from "../../../utils/common";
+import { useOldBrowser } from "../../../utils/oldBrowserContext";
 
 export const Title = ({
   text,
@@ -21,6 +22,7 @@ export const Title = ({
   top?: string;
 }) => {
   const isMobile = useMobile();
+  const { isOldBrowser } = useOldBrowser();
   return (
     <>
       <div
@@ -49,7 +51,9 @@ export const Title = ({
             </React.Fragment>
           ))}
         </Text>
-        <div className={styles.line}></div>
+        <div
+          className={`${isOldBrowser ? "margin--large-l" : ""} ${styles.line}`}
+        ></div>
         {isMobile && <div className={styles.lineReduce}></div>}
       </div>
     </>

@@ -8,6 +8,7 @@ import loveStory1 from "../../../assets/images/love-story/love-story-1.png";
 import loveStory2 from "../../../assets/images/love-story/love-story-2.png";
 import loveStory3 from "../../../assets/images/love-story/love-story-3.png";
 import Flower from "../../Shared/Flower/Flower";
+import { useOldBrowser } from "../../../utils/oldBrowserContext";
 
 const NavigationButton = ({
   direction,
@@ -68,6 +69,37 @@ const SingleStory = ({
   );
 };
 
+const SingleStoryOldBrowser = ({
+  year,
+  imageSrc,
+  caption,
+  objectPosition,
+}: SingleStoryProps) => {
+  return (
+    <div className="margin--xxlarge-b padding--page-default-l padding--page-default-r">
+      <div className={styles.imageContainerOldBrowser}>
+        <img src={imageSrc} style={{ objectPosition }} alt={`${year}`} />
+      </div>
+      <div className="margin--large-t">
+        <Text block={false} color="primary" fontSize={34} fontWeight="700">
+          {year}
+        </Text>
+      </div>
+      <Text
+        textAlign="justify"
+        className="line-height-normal"
+        block={false}
+        color="primary"
+        fontStyle="italic"
+        fontSize={13}
+        mobileSize={12}
+      >
+        {caption}
+      </Text>
+    </div>
+  );
+};
+
 const stories: SingleStoryProps[] = [
   {
     year: "2018",
@@ -93,6 +125,7 @@ const stories: SingleStoryProps[] = [
 ];
 
 export const LoveStory = () => {
+  const { isOldBrowser } = useOldBrowser();
   const [rendered, setRendered] = useState(false);
   const [storyWidth, setStoryWidth] = useState(0);
   const [shownStory, setShownStory] = useState(0);
@@ -134,6 +167,7 @@ export const LoveStory = () => {
 
   return (
     <MobilePage
+      fullHeight={isOldBrowser ? false : true}
       id="LoveStory"
       customClassName={`${styles.container} padding--page-default-b`}
     >
@@ -144,45 +178,57 @@ export const LoveStory = () => {
         className={`padding--large-t padding--large-b ${styles.shadow}`}
         text={["Our", "Love", "Story"]}
       />
-      <div className={`position-relative ${styles.storyContainer}`}>
-        <Flower
-          maxHeight="400px"
-          height="100%"
-          width="100%"
-          maxWidth="600px"
-          top="-50px"
-        />
+      {isOldBrowser ? (
+        <div>
+          {stories.map((story) => {
+            return <SingleStoryOldBrowser {...story} key={story.imageSrc} />;
+          })}
+        </div>
+      ) : (
         <div
-          className={`padding--page-default-l padding--page-default-r ${styles.storyCarouselContainer}`}
+          className={`position-relative ${
+            isOldBrowser ? styles.storyContainerOldBrowser : ""
+          } ${styles.storyContainer}`}
         >
+          <Flower
+            maxHeight="400px"
+            height="100%"
+            width="100%"
+            maxWidth="600px"
+            top="-50px"
+          />
           <div
-            style={{
-              transform: `translateX(-${shownStory * (storyWidth + 100)}px)`,
-            }}
-            className={styles.movingContainer}
+            className={`padding--page-default-l padding--page-default-r ${styles.storyCarouselContainer}`}
           >
-            {stories.map((story) => {
-              return <SingleStory {...story} key={story.imageSrc} />;
-            })}
+            <div
+              style={{
+                transform: `translateX(-${shownStory * (storyWidth + 100)}px)`,
+              }}
+              className={styles.movingContainer}
+            >
+              {stories.map((story) => {
+                return <SingleStory {...story} key={story.imageSrc} />;
+              })}
+            </div>
+          </div>
+          <div
+            className={`padding--page-default-l padding--page-default-r ${styles.navigation}`}
+          >
+            <Text
+              className="line-height-normal"
+              customStyle={{ minWidth: "max-content" }}
+              fontSize={15}
+              color="primary"
+              font="diamondBridge"
+            >
+              Beberapa Tahun Bersama
+            </Text>
+            <div className={styles.line}></div>
+            <NavigationButton onClick={onClickPrevStory} direction="left" />
+            <NavigationButton onClick={onClickNextStory} direction="right" />
           </div>
         </div>
-        <div
-          className={`padding--page-default-l padding--page-default-r ${styles.navigation}`}
-        >
-          <Text
-            className="line-height-normal"
-            customStyle={{ minWidth: "max-content" }}
-            fontSize={15}
-            color="primary"
-            font="diamondBridge"
-          >
-            Beberapa Tahun Bersama
-          </Text>
-          <div className={styles.line}></div>
-          <NavigationButton onClick={onClickPrevStory} direction="left" />
-          <NavigationButton onClick={onClickNextStory} direction="right" />
-        </div>
-      </div>
+      )}
     </MobilePage>
   );
 };

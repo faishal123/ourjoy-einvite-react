@@ -10,6 +10,8 @@ const FadeGallery = ({
   transitionDuration = "1s",
   className = "",
   onClick,
+  id = "",
+  itemClassName = "",
 }: {
   images: string[];
   currentImage: number;
@@ -20,6 +22,8 @@ const FadeGallery = ({
   transitionDuration?: string;
   className?: string;
   onClick?: () => void;
+  id?: string;
+  itemClassName?: string;
 }) => {
   return (
     <div
@@ -29,9 +33,12 @@ const FadeGallery = ({
     >
       {images.map((image, index) => (
         <img
+          id={`${id}-${index}`}
           style={{ transitionDuration }}
           key={image}
-          className={index === currentImage ? "" : styles.hidden}
+          className={`${itemClassName} ${
+            index === currentImage ? "" : styles.hidden
+          }`}
           src={image}
           alt="imageGallery"
         />
