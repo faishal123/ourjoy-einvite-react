@@ -119,10 +119,11 @@ const Carousel = ({
 
     if (scrollContainerElement) {
       const currentScrollPosition = scrollContainerElement.scrollLeft;
-      scrollContainerElement.scrollTo({
-        left: currentScrollPosition + (increase ? 400 : -400),
-        behavior: "smooth",
-      });
+      scrollContainerElement?.scrollTo &&
+        scrollContainerElement?.scrollTo({
+          left: currentScrollPosition + (increase ? 400 : -400),
+          behavior: "smooth",
+        });
     }
   };
 
@@ -175,10 +176,11 @@ const PhotoGallery = () => {
     );
 
     if (scrollContainerElement) {
-      scrollContainerElement.scrollTo({
-        left: current * 130,
-        behavior: "smooth",
-      });
+      scrollContainerElement?.scrollTo &&
+        scrollContainerElement?.scrollTo({
+          left: current * 130,
+          behavior: "smooth",
+        });
     }
   }, [current]);
 

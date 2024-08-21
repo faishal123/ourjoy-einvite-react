@@ -52,7 +52,8 @@ export const HalamanPembuka = () => {
 
     const topMostContainerElement = document.getElementById("topMostContainer");
     if (topMostContainerElement) {
-      topMostContainerElement.scrollTo({ top: 0, behavior: "smooth" });
+      topMostContainerElement?.scrollTo &&
+        topMostContainerElement.scrollTo({ top: 0, behavior: "smooth" });
       topMostContainerElement.style.overflowY = "hidden";
     }
   }, []);
