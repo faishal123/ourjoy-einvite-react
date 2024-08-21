@@ -1,3 +1,4 @@
+import { CSSProperties } from "react";
 import styles from "./Polaroid.module.css";
 
 const Polaroid = ({
@@ -7,6 +8,7 @@ const Polaroid = ({
   height = "285px",
   maxWidth = "320px",
   width = "90%",
+  style = {},
 }: {
   rotate?: number;
   imageSrc: string;
@@ -14,10 +16,11 @@ const Polaroid = ({
   height?: string;
   maxWidth?: string;
   width?: string;
+  style?: CSSProperties;
 }) => {
   return (
     <div
-      style={{ rotate: `${rotate}deg`, height, width, maxWidth }}
+      style={{ rotate: `${rotate}deg`, height, width, maxWidth, ...style }}
       className={`${styles.polaroid}`}
     >
       <img src={imageSrc} alt={alt} />

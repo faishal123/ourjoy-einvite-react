@@ -1,5 +1,4 @@
 import styles from "./Flower.module.css";
-import { useOldBrowser } from "../../../utils/oldBrowserContext";
 
 export type FlowerProps = {
   top?: string;
@@ -22,14 +21,22 @@ const Flower = ({
   height,
   zIndex,
 }: FlowerProps) => {
-  const { isOldBrowser } = useOldBrowser();
-
-  if (isOldBrowser) {
-    return null;
-  }
   return (
     <div
-      style={{ top, left, rotate, width, maxWidth, zIndex, height, maxHeight }}
+      style={{
+        top,
+        left,
+        // rotate,
+        width,
+        maxWidth,
+        zIndex,
+        height,
+        maxHeight,
+        display: "inline-block",
+        WebkitTransform: `rotate(${rotate})`,
+        MozTransform: `rotate(${rotate})`,
+        OTransform: `rotate(${rotate})`,
+      }}
       className={styles.flower}
     >
       <img

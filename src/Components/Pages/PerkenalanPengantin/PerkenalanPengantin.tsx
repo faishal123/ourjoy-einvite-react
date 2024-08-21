@@ -33,20 +33,27 @@ const PersonalInfo = ({
 }) => {
   return (
     <div>
-      <div className="position-relative">
+      <div style={{ height: "45vh" }} className="position-relative">
+        <Polaroid
+          height="45vh"
+          rotate={photoRotation}
+          imageSrc={photoUrl}
+          alt={name}
+          style={{
+            zIndex: 1,
+            position: "absolute",
+            left: "50%",
+            transform: "translate(-50%, 0)",
+          }}
+        />
         <Flower
           top="-75px"
           left="-70px"
           rotate="365deg"
           width="120%"
           maxWidth="450px"
+          zIndex={0}
           {...flowerProps}
-        />
-        <Polaroid
-          height="45vh"
-          rotate={photoRotation}
-          imageSrc={photoUrl}
-          alt={name}
         />
       </div>
       <div className={styles.textContainer}>

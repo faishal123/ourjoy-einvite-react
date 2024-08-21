@@ -1,7 +1,6 @@
 .titleContainer {
   display: flex;
   align-items: center;
-  gap: 20px;
   top: 0;
   z-index: 999;
   transition: 0.2s;
@@ -17,6 +16,7 @@
   border-radius: 2px;
   width: 100%;
   transition: 0.2s;
+  margin-left: 20px;
 }
 
 .background-white {

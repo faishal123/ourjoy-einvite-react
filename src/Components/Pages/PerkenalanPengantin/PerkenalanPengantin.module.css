@@ -23,4 +23,5 @@
 .textContainer {
   z-index: 999;
   position: relative;
+  background: var(--primary-background);
 }

@@ -1,5 +1,4 @@
 import styles from "./Video.module.css";
-import { useOldBrowser } from "../../../utils/oldBrowserContext";
 
 const Video = ({
   id,
@@ -14,10 +13,6 @@ const Video = ({
   controls?: boolean;
   maxHeight?: string;
 }) => {
-  const { isOldBrowser } = useOldBrowser();
-  if (isOldBrowser) {
-    return null;
-  }
   return (
     <div
       style={{
@@ -39,8 +34,16 @@ const Video = ({
         height="100%"
         controls={controls}
         style={{ objectFit: "cover" }}
-        src="https://utfs.io/f/9c3a77c5-aa96-4fdc-b65c-3647d6286936-k45cyw.mp4"
-      />
+      >
+        <source
+          src="https://utfs.io/f/080c0836-466a-4652-bdd4-572bee7051d4-g3dgcd.webm"
+          type="video/webm"
+        />
+        <source
+          src="https://utfs.io/f/9c3a77c5-aa96-4fdc-b65c-3647d6286936-k45cyw.mp4"
+          type="video/mp4"
+        />
+      </video>
     </div>
   );
 };

@@ -5,7 +5,6 @@ import { MobilePage } from "../../Shared/MobileOnlyLayout/MobileOnlyLayout";
 import { Text } from "../../Shared/Text/Text";
 import { Button } from "../../Shared/Button/Button";
 import { LoveIcon } from "../../Shared/Icons/Icons";
-import { useOldBrowser } from "../../../utils/oldBrowserContext";
 import coverImage1 from "../../../assets/images/cover-image/cover-image-1.png";
 import { MusicContext } from "../../Shared/Music/Music";
 import { useInitialLoader } from "../../Shared/InitialLoader/InitialLoader";
@@ -18,8 +17,6 @@ export const HalamanPembuka = () => {
   // const { convertFunction } = useDynamicTextData({
   //   pageKey: "HalamanPembuka",
   // });
-
-  const { isOldBrowser } = useOldBrowser();
 
   const currentUrl = new URL(window.location.href);
   const searchParams = currentUrl.searchParams;
@@ -53,13 +50,9 @@ export const HalamanPembuka = () => {
 
     const topMostContainerElement = document.getElementById("topMostContainer");
     if (topMostContainerElement) {
-      if (!isOldBrowser) {
-        topMostContainerElement?.scrollTo &&
-          topMostContainerElement.scrollTo({ top: 0, behavior: "smooth" });
-        topMostContainerElement.style.overflowY = "hidden";
-      } else {
-        topMostContainerElement.style.overflowY = "auto";
-      }
+      topMostContainerElement?.scrollTo &&
+        topMostContainerElement.scrollTo({ top: 0, behavior: "smooth" });
+      topMostContainerElement.style.overflowY = "hidden";
     }
   }, []);
 
@@ -92,19 +85,10 @@ export const HalamanPembuka = () => {
         id="HalamanPembuka"
         customClassName={styles.pageContainer}
       >
-        {isOldBrowser ? (
-          <div className={styles.coverImageContainerOldBrowser}>
-            <img src={coverImage1} alt="ArinDanBagas" />
-          </div>
-        ) : (
-          <CoverImage />
-        )}
+        <CoverImage />
+
         <div className={styles.overlay}></div>
-        <div
-          className={`${
-            isOldBrowser ? styles.contentOldBrowser : styles.content
-          }`}
-        >
+        <div style={{ height: "100svh" }} className={`${styles.content}`}>
           <div className={styles.header}>
             <div>
               {/* {convertFunction("theWeddingOf")} */}
@@ -195,18 +179,15 @@ export const HalamanPembuka = () => {
                   setShowIcon(true);
                   setIsPlaying(true);
 
+                  const HTMLElement =
+                    document.getElementsByTagName("html")?.[0];
+                  if (HTMLElement) {
+                    HTMLElement.style.overflow = "auto";
+                  }
                   const topMostContainerElement =
                     document.getElementById("topMostContainer");
                   if (topMostContainerElement) {
                     topMostContainerElement.style.overflowY = "auto";
-                  }
-
-                  if (isOldBrowser) {
-                    const HTMLElement =
-                      document.getElementsByTagName("html")?.[0];
-                    if (HTMLElement) {
-                      HTMLElement.style.overflow = "auto";
-                    }
                   }
 
                   const AyatAlQuranElement =

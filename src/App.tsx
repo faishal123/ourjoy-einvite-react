@@ -18,49 +18,46 @@ import Video from "./Components/Shared/Video/Video";
 import "./App.css";
 import "react-toastify/dist/ReactToastify.css";
 import { ModalProvider } from "./Components/Shared/Modal/Modal";
-import { OldBrowseerProvider } from "./utils/oldBrowserContext";
 
 function App() {
   useIntersectionObserver();
   return (
     <div id="topMostContainer" className="App">
       <div>
-        <OldBrowseerProvider>
-          <MusicProvider>
-            <ModalProvider>
-              <MobileOnlyLayout>
-                <HalamanPembuka />
-                <AyatAlQuran />
-                <PerkenalanPengantin />
-                <ColorTransition
-                  height="100px"
-                  width="100%"
-                  colors={[
-                    { color: "white", position: "0%" },
-                    { color: "#EEEEE6", position: "100%" },
-                  ]}
-                />
-                <LoveStory />
-                <DetailAcara />
-                <ColorTransition
-                  height="100px"
-                  width="100%"
-                  colors={[
-                    { color: "white", position: "0%" },
-                    { color: "#EEEEE6", position: "100%" },
-                  ]}
-                />
-                <Gallery />
-                <WeddingGift />
-                <Video isSticky={false} id="video-2" />
-                <RSVPAndWishes />
-                <Penutup />
-                <Footer />
-                <Music />
-              </MobileOnlyLayout>
-            </ModalProvider>
-          </MusicProvider>
-        </OldBrowseerProvider>
+        <MusicProvider>
+          <ModalProvider>
+            <MobileOnlyLayout>
+              <HalamanPembuka />
+              <AyatAlQuran />
+              <PerkenalanPengantin />
+              <ColorTransition
+                height="100px"
+                width="100%"
+                colors={[
+                  { color: "white", position: "0%" },
+                  { color: "#EEEEE6", position: "100%" },
+                ]}
+              />
+              <LoveStory />
+              <DetailAcara />
+              <ColorTransition
+                height="100px"
+                width="100%"
+                colors={[
+                  { color: "white", position: "0%" },
+                  { color: "#EEEEE6", position: "100%" },
+                ]}
+              />
+              <Gallery />
+              <WeddingGift />
+              <Video isSticky={false} id="video-2" />
+              <RSVPAndWishes />
+              <Penutup />
+              <Footer />
+              <Music />
+            </MobileOnlyLayout>
+          </ModalProvider>
+        </MusicProvider>
         <ToastContainer limit={1} />
       </div>
     </div>

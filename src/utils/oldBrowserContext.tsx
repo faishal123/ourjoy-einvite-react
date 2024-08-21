@@ -15,7 +15,7 @@ export const useOldBrowser = () => {
   return { isOldBrowser };
 };
 
-export const OldBrowseerProvider = ({ children }: { children: ReactNode }) => {
+export const OldBrowserProvider = ({ children }: { children: ReactNode }) => {
   const [isOldBrowser, setIsOldBrowser] = useState(false);
   useEffect(() => {
     const topMostContainerElement = document.getElementById("topMostContainer");

@@ -27,7 +27,6 @@ import gallery19 from "../../../assets/images/gallery/gallery-19 small.jpg";
 import gallery20 from "../../../assets/images/gallery/gallery-20 small.jpg";
 import gallery21 from "../../../assets/images/gallery/gallery-21 small.jpg";
 import gallery22 from "../../../assets/images/gallery/gallery-22 small.jpg";
-import { useOldBrowser } from "../../../utils/oldBrowserContext";
 
 const photos = [
   gallery1,
@@ -62,7 +61,11 @@ const NavigationButton = ({
   onClick: () => void;
 }) => {
   return (
-    <div role="button" onClick={onClick} className={styles.navigationButton}>
+    <div
+      role="button"
+      onClick={onClick}
+      className={`margin--medium-l ${styles.navigationButton}`}
+    >
       {direction === "left" ? (
         <ChevronLeft color="white" size={20} />
       ) : (
@@ -83,7 +86,6 @@ const Carousel = ({
   onClickPrev: () => void;
   current: number;
 }) => {
-  const { isOldBrowser } = useOldBrowser();
   return (
     <>
       <div id="carousel-scroll-container" className={styles.carouselContainer}>
@@ -91,13 +93,9 @@ const Carousel = ({
           {photos.map((src, i) => {
             return (
               <div
-                style={
-                  isOldBrowser
-                    ? {
-                        margin: "0 10px",
-                      }
-                    : {}
-                }
+                style={{
+                  margin: "0 10px",
+                }}
                 id={`ourGallery-${i}`}
                 onClick={() => onClickPhoto(i)}
                 className={`${i === current ? styles.active : ""} ${
@@ -123,7 +121,7 @@ const Carousel = ({
         >
           More galleries
         </Text>
-        <div className={styles.line}></div>
+        <div className={`margin--medium-l ${styles.line}`}></div>
         <NavigationButton onClick={onClickPrev} direction="left" />
         <NavigationButton onClick={onClickNext} direction="right" />
       </div>
@@ -133,24 +131,13 @@ const Carousel = ({
 
 const PhotoGallery = () => {
   const [current, setCurrent] = useState(0);
-  const { isOldBrowser } = useOldBrowser();
   useEffect(() => {
     const scrollContainerElement = document.getElementById(
       "carousel-scroll-container"
     );
 
-    if (!isOldBrowser) {
-      if (scrollContainerElement) {
-        scrollContainerElement?.scrollTo &&
-          scrollContainerElement?.scrollTo({
-            left: current * 130,
-            behavior: "smooth",
-          });
-      }
-    } else {
-      if (scrollContainerElement) {
-        scrollContainerElement.scrollLeft = current * 140;
-      }
+    if (scrollContainerElement) {
+      scrollContainerElement.scrollLeft = current * 140;
     }
   }, [current]);
 
