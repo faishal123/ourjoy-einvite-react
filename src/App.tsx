@@ -17,10 +17,16 @@ import { ToastContainer } from "react-toastify";
 import Video from "./Components/Shared/Video/Video";
 import "./App.css";
 import "react-toastify/dist/ReactToastify.css";
+import LogRocket from "logrocket";
 import { ModalProvider } from "./Components/Shared/Modal/Modal";
 
 function App() {
   useIntersectionObserver();
+  const currentUrl = window.location.href;
+  const isLocal = currentUrl.includes("localhost");
+  if (!isLocal) {
+    LogRocket.init("dxsseq/arindanbagas");
+  }
   return (
     <div id="topMostContainer" className="App">
       <div>
