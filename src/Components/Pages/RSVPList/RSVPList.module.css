@@ -1,0 +1,11 @@
+.loading {
+  width: min-content;
+  margin: 20px auto;
+}
+
+.singleItem {
+  padding: 10px;
+  border: 1px solid var(--primary);
+  border-radius: 10px;
+  margin-bottom: 10px;
+}

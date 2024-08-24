@@ -11,6 +11,8 @@ import { useInitialLoader } from "../../Shared/InitialLoader/InitialLoader";
 import coverImage2 from "../../../assets/images/cover-image/cover-image-2.png";
 import coverImage3 from "../../../assets/images/cover-image/cover-image-3.png";
 import FadeGallery from "../../Shared/FadeGallery/FadeGallery";
+import { useModal } from "../../Shared/Modal/Modal";
+import RSVPList from "../RSVPList/RSVPList";
 // import { useDynamicTextData } from "@/utils/dynamicText";
 
 export const HalamanPembuka = () => {
@@ -18,10 +20,13 @@ export const HalamanPembuka = () => {
   //   pageKey: "HalamanPembuka",
   // });
 
+  const { renderModal } = useModal();
+
   const currentUrl = new URL(window.location.href);
   const searchParams = currentUrl.searchParams;
 
   const recipient = searchParams?.get("kepada");
+  const renderRsvpList = searchParams?.get("rsvplist") === "true";
 
   const { setIsPlaying, setShowIcon } = useContext(MusicContext);
 
@@ -53,6 +58,15 @@ export const HalamanPembuka = () => {
       topMostContainerElement?.scrollTo &&
         topMostContainerElement.scrollTo({ top: 0, behavior: "smooth" });
       topMostContainerElement.style.overflowY = "hidden";
+    }
+
+    if (renderRsvpList) {
+      renderModal(<RSVPList />, "listRsvp", {
+        maxHeight: "90vh",
+        overflow: "auto",
+        maxWidth: "500px",
+        width: "90vw",
+      });
     }
   }, []);
 

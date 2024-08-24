@@ -43,7 +43,13 @@ const SingleWish = ({
   );
 };
 
-type RSVPType = {
+export const confirmationOptions = [
+  { label: "Hadir", value: "yes" },
+  { label: "Tidak Hadir", value: "no" },
+  { label: "Belum Tau", value: "maybe" },
+];
+
+export type RSVPType = {
   confirmation: string;
   created_at: string;
   id: number;
@@ -61,16 +67,11 @@ export const RSVPAndWishes = () => {
   const {
     data: rsvpData,
     loading: rsvpLoading,
-    error: rsvpError,
     fetchFunction: rsvpFetchFunction,
   } = useFetchFunction<RSVPType[]>();
 
-  const {
-    data: createRsvpData,
-    loading: createRsvpLoading,
-    error: createRsvpError,
-    fetchFunction: createRsvpFetchFunction,
-  } = useFetchFunction();
+  const { loading: createRsvpLoading, fetchFunction: createRsvpFetchFunction } =
+    useFetchFunction();
 
   const fetchRsvp = () => {
     rsvpFetchFunction(() => fetch("https://ourjoy-einvite.vercel.app/rsvp"));
@@ -117,11 +118,7 @@ export const RSVPAndWishes = () => {
             onChange={(e) => setIsComing((e.target as HTMLSelectElement).value)}
             className="margin--medium-t"
             placeholder="Pilih Konfirmasi Kehadiran"
-            options={[
-              { label: "Hadir", value: "yes" },
-              { label: "Tidak Hadir", value: "no" },
-              { label: "Belum Tau", value: "maybe" },
-            ]}
+            options={confirmationOptions}
           />
 
           <div className="margin--xxlarge-t">
@@ -129,6 +126,7 @@ export const RSVPAndWishes = () => {
               loading={createRsvpLoading}
               onClick={() => {
                 if (!name || !relation || !message || !isComing) {
+                  toast.error("Lengkapi semua data terlebih dahulu");
                   return;
                 }
                 createRsvpFetchFunction(
