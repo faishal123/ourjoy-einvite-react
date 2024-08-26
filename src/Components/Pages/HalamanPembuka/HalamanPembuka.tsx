@@ -70,7 +70,7 @@ export const HalamanPembuka = () => {
     }
   }, []);
 
-  const coverImages = [coverImage1, coverImage2, coverImage3];
+  const coverImages = [coverImage3, coverImage1, coverImage2];
 
   const CoverImage = () => {
     const [renderedImage, setRenderedImage] = useState(0);
